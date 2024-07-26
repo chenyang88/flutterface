@@ -26,8 +26,7 @@ class FaceEmbedding {
   final _logger = Logger('FaceEmbeddingService');
 
   final MobileFaceNetModelConfig config;
-  late final FaceEmbeddingOptions embeddingOptions =
-      config.faceEmbeddingOptions;
+  late final FaceEmbeddingOptions embeddingOptions = config.faceEmbeddingOptions;
   // singleton pattern
   FaceEmbedding._privateConstructor({required this.config});
 
@@ -37,8 +36,7 @@ class FaceEmbedding {
   /// Then you can use `predict()` to get the embedding of a face, so `FaceEmbedding.instance.predict(imageData)`
   ///
   /// config options: faceEmbeddingEnte
-  static final instance =
-      FaceEmbedding._privateConstructor(config: faceEmbeddingEnte);
+  static final instance = FaceEmbedding._privateConstructor(config: faceEmbeddingEnte);
   factory FaceEmbedding() => instance;
 
   /// Check if the interpreter is initialized, if not initialize it with `loadModel()`
@@ -157,8 +155,7 @@ class FaceEmbedding {
         config.modelPath,
         options: interpreterOptions,
       );
-      _isolateInterpreter ??=
-          IsolateInterpreter(address: _interpreter!.address);
+      _isolateInterpreter ??= await IsolateInterpreter.create(address: _interpreter!.address);
 
       _logger.info('Interpreter created from asset: ${config.modelPath}');
 

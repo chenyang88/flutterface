@@ -41,8 +41,7 @@ class BlazeFaceFaceDetection {
   /// Then you can use `predict()` to get the bounding boxes of the faces, so `FaceDetection.instance.predict(imageData)`
   ///
   /// config options: faceDetectionFront // faceDetectionBackWeb // faceDetectionShortRange //faceDetectionFullRangeSparse; // faceDetectionFullRangeDense (faster than web while still accurate)
-  static final instance =
-      BlazeFaceFaceDetection._privateConstructor(config: faceDetectionBackWeb);
+  static final instance = BlazeFaceFaceDetection._privateConstructor(config: faceDetectionBackWeb);
   factory BlazeFaceFaceDetection() => instance;
 
   /// Check if the interpreter is initialized, if not initialize it with `loadModel()`
@@ -59,8 +58,7 @@ class BlazeFaceFaceDetection {
     final stopwatch = Stopwatch()..start();
 
     final stopwatchDecoding = Stopwatch()..start();
-    final (inputImageMatrix, _, newSize) =
-        await ImageMlIsolate.instance.preprocessImageBlazeFace(
+    final (inputImageMatrix, _, newSize) = await ImageMlIsolate.instance.preprocessImageBlazeFace(
       imageData,
       normalize: true,
       requiredWidth: _faceOptions.inputWidth,
@@ -162,22 +160,19 @@ class BlazeFaceFaceDetection {
     // Uint8List fileData, TODO: add this, and use it for cropAndPadFace
   ) async {
     // Get the bounding boxes of the faces
-    final List<FaceDetectionRelative> phase1Faces =
-        await predict(thumbnailData);
+    final List<FaceDetectionRelative> phase1Faces = await predict(thumbnailData);
 
     final finalDetections = <FaceDetectionRelative>[];
     for (final FaceDetectionRelative phase1Face in phase1Faces) {
       // Enlarge the bounding box by factor 2
       final List<double> imageBox = getEnlargedRelativeBox(phase1Face.box, 2.0);
       // Crop and pad the image
-      final paddedImage =
-          await ImageMlIsolate.instance.cropAndPadFace(thumbnailData, imageBox);
+      final paddedImage = await ImageMlIsolate.instance.cropAndPadFace(thumbnailData, imageBox);
       // Enlarge the imageBox, to help with transformation to original image
       final List<double> paddedBox = getEnlargedRelativeBox(imageBox, 2.0);
 
       // Get the bounding boxes of the faces
-      final List<FaceDetectionRelative> phase2Faces =
-          await BlazeFaceFaceDetection.instance.predict(paddedImage);
+      final List<FaceDetectionRelative> phase2Faces = await BlazeFaceFaceDetection.instance.predict(paddedImage);
       // Transform the bounding boxes to original image
       for (final phase2Detection in phase2Faces) {
         phase2Detection.transformRelativeToOriginalImage(
@@ -194,11 +189,9 @@ class BlazeFaceFaceDetection {
       }
 
       // TODO: there can be cases where the first phase detection is good but the second is not. This would happen on very low quality images. In those cases we should still just use the first detection.
-      if (selected != null &&
-          selected.score > _faceOptions.minScoreSigmoidThresholdSecondPass) {
+      if (selected != null && selected.score > _faceOptions.minScoreSigmoidThresholdSecondPass) {
         finalDetections.add(selected);
-      } else if (phase1Face.score >
-          _faceOptions.minScoreSigmoidThresholdSecondPass) {
+      } else if (phase1Face.score > _faceOptions.minScoreSigmoidThresholdSecondPass) {
         finalDetections.add(phase1Face);
         _logger.info(
           'No high confidence face detected in second phase, using first phase detection',
@@ -252,8 +245,7 @@ class BlazeFaceFaceDetection {
         config.modelPath,
         options: interpreterOptions,
       );
-      _isolateInterpreter ??=
-          IsolateInterpreter(address: _interpreter!.address);
+      _isolateInterpreter ??= await IsolateInterpreter.create(address: _interpreter!.address);
 
       _logger.info('Interpreter created from asset: ${config.modelPath}');
 

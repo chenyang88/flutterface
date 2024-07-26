@@ -36,8 +36,7 @@ class YOLOFaceDetection {
   /// Then you can use `predict()` to get the bounding boxes of the faces, so `FaceDetection.instance.predict(imageData)`
   ///
   /// config options: yoloV5FaceN //
-  static final instance =
-      YOLOFaceDetection._privateConstructor(config: yoloV5FaceS480x640tflite);
+  static final instance = YOLOFaceDetection._privateConstructor(config: yoloV5FaceS480x640tflite);
   factory YOLOFaceDetection() => instance;
 
   /// Check if the interpreter is initialized, if not initialize it with `loadModel()`
@@ -54,8 +53,7 @@ class YOLOFaceDetection {
     final stopwatch = Stopwatch()..start();
 
     final stopwatchDecoding = Stopwatch()..start();
-    final (inputImageMatrix, originalSize, newSize) =
-        await ImageMlIsolate.instance.preprocessImageYOLOtflite(
+    final (inputImageMatrix, originalSize, newSize) = await ImageMlIsolate.instance.preprocessImageYOLOtflite(
       imageData,
       normalize: true,
       requiredWidth: _faceOptions.inputWidth,
@@ -163,8 +161,7 @@ class YOLOFaceDetection {
         config.modelPath,
         options: interpreterOptions,
       );
-      _isolateInterpreter ??=
-          IsolateInterpreter(address: _interpreter!.address);
+      _isolateInterpreter ??= await IsolateInterpreter.create(address: _interpreter!.address);
 
       _logger.info('Interpreter created from asset: ${config.modelPath}');
 

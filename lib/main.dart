@@ -1,7 +1,10 @@
 import 'dart:developer' as devtools show log;
+
 import 'package:computer/computer.dart';
+import 'package:face_camera/face_camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterface/ui/home_page.dart';
+import 'package:flutterface/app_routes.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:logging/logging.dart';
 
 void main() async {
@@ -13,6 +16,8 @@ void main() async {
     );
   });
   await Computer.shared().turnOn(workersCount: 2);
+  WidgetsFlutterBinding.ensureInitialized();
+  await FaceCamera.initialize();
   runApp(const MyApp());
 }
 
@@ -21,13 +26,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'FlutterFace Demo'),
+      getPages: AppPages.pages,
+      initialRoute: AppRoutes.home,
     );
   }
 }
