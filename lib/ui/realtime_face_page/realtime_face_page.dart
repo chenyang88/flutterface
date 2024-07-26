@@ -2,26 +2,26 @@ import 'dart:async';
 
 import 'package:face_camera/face_camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterface/ui/realtime_detect_page/realtime_detect_logic.dart';
-import 'package:flutterface/ui/realtime_detect_page/realtime_detect_state.dart';
+import 'package:flutterface/ui/realtime_face_page/realtime_face_logic.dart';
+import 'package:flutterface/ui/realtime_face_page/realtime_face_state.dart';
 import 'package:get/get.dart';
 
-class RealtimeDetectPage extends StatefulWidget {
-  const RealtimeDetectPage({super.key});
+class RealtimeFacePage extends StatefulWidget {
+  const RealtimeFacePage({super.key});
 
   @override
-  State<RealtimeDetectPage> createState() => _State();
+  State<RealtimeFacePage> createState() => _State();
 }
 
-class _State extends State<RealtimeDetectPage> {
-  late final RealtimeDetectLogic logic;
-  late final RealtimeDetectState state;
+class _State extends State<RealtimeFacePage> {
+  late final RealtimeFaceLogic logic;
+  late final RealtimeFaceState state;
 
   @override
   void initState() {
     super.initState();
-    logic = Get.put(RealtimeDetectLogic());
-    state = Get.find<RealtimeDetectLogic>().state;
+    logic = Get.put(RealtimeFaceLogic());
+    state = Get.find<RealtimeFaceLogic>().state;
   }
 
   @override

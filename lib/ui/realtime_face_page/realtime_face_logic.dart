@@ -8,13 +8,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterface/services/face_ml/face_detection/detection.dart';
 import 'package:flutterface/ui/face_helper.dart';
-import 'package:flutterface/ui/realtime_detect_page/realtime_detect_state.dart';
 import 'package:flutterface/utils/snackbar_message.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class RealtimeDetectLogic extends GetxController {
-  final state = RealtimeDetectState();
+import 'realtime_face_state.dart';
+
+class RealtimeFaceLogic extends GetxController {
+  final state = RealtimeFaceState();
   final ImagePicker picker = ImagePicker();
   BuildContext? context;
 

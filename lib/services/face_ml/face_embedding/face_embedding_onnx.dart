@@ -45,8 +45,7 @@ class FaceEmbeddingOnnx {
 
   Future<void> dispose() async {
     if (_isInitialized) {
-      await _computer
-          .compute(releaseModel, param: {'address': _sessionAddress});
+      await _computer.compute(releaseModel, param: {'address': _sessionAddress});
       _isInitialized = false;
       _sessionAddress = 0;
     }
@@ -109,7 +108,7 @@ class FaceEmbeddingOnnx {
           'address': _sessionAddress,
           'inputSize': kInputSize,
         },
-        taskName: 'createFaceEmbedding',
+        // taskName: 'createFaceEmbedding',
       ) as List<double>;
       stopwatch.stop();
       _logger.info(
@@ -141,8 +140,7 @@ class FaceEmbeddingOnnx {
     final address = args['address'] as int;
     final inputSize = args['inputSize'] as int;
     final runOptions = OrtRunOptions();
-    final int numberOfFaces =
-        inputImageList.length ~/ (inputSize * inputSize * 3);
+    final int numberOfFaces = inputImageList.length ~/ (inputSize * inputSize * 3);
     final inputOrt = OrtValueTensor.createTensorWithDataList(
       inputImageList,
       [numberOfFaces, inputSize, inputSize, 3],

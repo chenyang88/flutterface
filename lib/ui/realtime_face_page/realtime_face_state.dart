@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 enum Recognize { initial, detecting, focusing, success, failed }
 
-class RealtimeDetectState {
+class RealtimeFaceState {
   double? similarity;
   Uint8List? imageOriginalData;
   Image? imageOriginal;

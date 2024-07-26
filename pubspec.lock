@@ -50,7 +50,7 @@ packages:
     source: hosted
     version: "2.1.1"
   camera:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: camera
       sha256: "2170a943dcb67be2af2c6bcda8775e74b41d4c02d6a4eb10bdc832ee185c4eea"
@@ -116,11 +116,10 @@ packages:
   computer:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "82e365fed8a1a76f6eea0220de98389eed7b0445"
-      url: "https://github.com/ente-io/computer.git"
-    source: git
+      name: computer
+      sha256: "34176c612a02ebf3e5eaa3e9b40e2b1df495043c46614999639d19e66823232d"
+      url: "https://pub.dev"
+    source: hosted
     version: "3.2.1"
   convert:
     dependency: transitive
@@ -274,7 +273,7 @@ packages:
     source: hosted
     version: "0.7.1"
   google_mlkit_face_detection:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: google_mlkit_face_detection
       sha256: "5b597061cafe4dfa70f66adddadd19381eb88bd3312b074528c62b246392304b"
@@ -460,12 +459,11 @@ packages:
   onnxruntime:
     dependency: "direct main"
     description:
-      path: "."
-      ref: isolates
-      resolved-ref: "5f26aef45ed9f5e563c26f90c1e21b3339ed906d"
-      url: "https://github.com/ente-io/onnxruntime.git"
-    source: git
-    version: "1.1.0"
+      name: onnxruntime
+      sha256: e77ec05acafc135cc5fe7bcdf11b101b39f06513c9d5e9fa02cb1929f6bac72a
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.1"
   package_config:
     dependency: transitive
     description:
@@ -752,7 +750,7 @@ packages:
     source: hosted
     version: "3.0.7"
   vector_math:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: vector_math
       sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
